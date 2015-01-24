@@ -7,8 +7,8 @@ import flixel.util.FlxRandom;
 
 class GameMap extends FlxTilemap
 {
-    public var _width:Int = 100;
-    public var _height:Int = 100;
+    public var _width:Int = 20;
+    public var _height:Int = 20;
     public var _tileSize:Int = 128;
 
     public static inline var TILE_TRANSPARENT = 0;
@@ -72,6 +72,11 @@ class GameMap extends FlxTilemap
 //    {
 //        super.update();
 //    }
+
+    public function getTileCoordsForWorldCoords(x:Float, y:Float):Array<Int>
+    {
+        return [Std.int(x / _tileSize), Std.int(y / _tileSize)];
+    }
 
     override public function destroy():Void
     {
