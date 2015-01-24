@@ -21,6 +21,9 @@ class PlayState extends FlxState
     private var _buildings:FlxTypedGroup<Building>;
     private var _buildingGibs:FlxEmitter;
 
+    private var BUILDING_PADDING = 2;
+    private var MAX_BUILDINGS = 100;
+
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -45,19 +48,23 @@ class PlayState extends FlxState
 
         _duck = new Duck();
         add(_duck);
-        FlxG.camera.follow(_duck, FlxCamera.STYLE_TOPDOWN, 1);
+        FlxG.camera.follow(_duck, FlxCamera.STYLE_TOPDOWN, null, 1);
+        FlxG.worldBounds.width = _map._width * _map._tileSize + 10;
+        FlxG.worldBounds.height = _map._height * _map._tileSize + 10;
 
 		super.create();
 	}
 
     private function placeBuildings():Void
     {
-        for (tileX in 3..._map._width - 3) {
-            for (tileY in 3..._map._height - 3) {
+        var buildingCount = 0;
+        for (tileY in BUILDING_PADDING..._map._height - BUILDING_PADDING) {
+            for (tileX in BUILDING_PADDING..._map._width - BUILDING_PADDING) {
                 switch (_map.getTile(tileX, tileY)) {
                     case GameMap.TILE_BLOCK:
-                        if (FlxRandom.float() < 0.1) {
+                        if (FlxRandom.float() < 0.2 && buildingCount < MAX_BUILDINGS) {
                             _buildings.add(new Building(tileX * _map._tileSize, tileY * _map._tileSize));
+                            buildingCount++;
                         }
                 }
             }
@@ -82,6 +89,7 @@ class PlayState extends FlxState
 	{
 		super.update();
 
+
         FlxG.overlap(_duck, _buildings, duckOverlapBuilding);
 
         // Make duck stay on map
@@ -98,9 +106,6 @@ class PlayState extends FlxState
 
     private function duckOverlapBuilding(duck:Duck, building:Building):Void
     {
-        trace("hit");
-        trace("alive" + building.alive);
-        trace("exists" + building.exists);
         if (duck.alive && duck.exists && building.alive && building.exists) {
             _buildingGibs.at(building);
             _buildingGibs.start(true, 5);
