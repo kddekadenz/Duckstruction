@@ -51,7 +51,7 @@ class PlayState extends FlxState
 		_buildingGibs.setRotation( -720, -720);
 		_buildingGibs.gravity = 800;
 		_buildingGibs.bounce = 0.35;
-		_buildingGibs.makeParticles("assets/images/brocken1.png", 80, 20, true, 0.0);
+		_buildingGibs.makeParticles("assets/images/particlestuff1.png", 80, 20, true, 0.0);
         add(_buildingGibs);
 
         _explosion = new Explosion();
