@@ -22,6 +22,8 @@ class MenuState extends FlxState
 	 */
 	override public function create():Void
 	{
+        FlxG.mouse.visible = true;
+
         _logo = new FlxSprite(0, 0, "assets/images/maskelogo.png");
         _logo.screenCenter();
         add(_logo);
