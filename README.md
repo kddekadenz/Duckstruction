@@ -15,3 +15,11 @@ Idea
    "What do we do now?"
  * Game starts over
 
+Team
+====
+
+ * Rebekka Helzle
+ * Till Behrend
+ * Rick Hoppmann
+ * Silvio Müller
+ * Oliver Zscheyge
