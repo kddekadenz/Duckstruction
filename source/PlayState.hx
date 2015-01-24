@@ -87,8 +87,8 @@ class PlayState extends FlxState
                 }
             }
         }
-        add(_buildings);
         add(_cars);
+        add(_buildings);
     }
 
 	
@@ -128,9 +128,9 @@ class PlayState extends FlxState
         if (_duck.y > _map._height * _map._tileSize - _duck.height)
             _duck.y = _map._height * _map._tileSize - _duck.height;
 
-        if (_buildings.countLiving() == 0 && _endtimer == null) {
+        if (_cars.countLiving() == 0 && _buildings.countLiving() == 0 && _endtimer == null) {
             _endtimer = new FlxTimer();
-            _endtimer.start(3.0, gotoEndState);
+            _endtimer.start(2.0, gotoEndState);
         }
 	}	
 
@@ -145,6 +145,7 @@ class PlayState extends FlxState
             remove(_explosion);
             add(_explosion);
             _explosion.animation.play("explode");
+            FlxG.sound.play("assets/sounds/Quak01.wav", 1, false);
             building.kill();
         }
     }
