@@ -21,6 +21,7 @@ class PlayState extends FlxState
     private var _duck:Duck;
     private var _buildings:FlxTypedGroup<Building>;
     private var _cars:FlxTypedGroup<Car>;
+    private var _persons:FlxTypedGroup<Person>;
     private var _buildingGibs:FlxEmitter;
     private var _endtimer(default, null):FlxTimer;
     private var _explosion:Explosion;
@@ -29,6 +30,7 @@ class PlayState extends FlxState
     private var MAX_BUILDINGS = 100;
     private var CHANCE_TO_SPAWN_BUILDING = 0.2;
     private var CHANCE_TO_SPAWN_CAR = 0.1;
+    private var CHANCE_TO_SPAWN_PERSON = 0.2;
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -43,6 +45,7 @@ class PlayState extends FlxState
 
         _buildings = new FlxTypedGroup<Building>();
         _cars = new FlxTypedGroup<Car>();
+        _persons = new FlxTypedGroup<Person>();
         placeBuildings();
 
         _buildingGibs = new FlxEmitter();
@@ -80,6 +83,8 @@ class PlayState extends FlxState
                         if (FlxRandom.float() < CHANCE_TO_SPAWN_BUILDING && buildingCount < MAX_BUILDINGS) {
                             _buildings.add(new Building(spawnX, spawnY));
                             buildingCount++;
+                        } else if (FlxRandom.float() < CHANCE_TO_SPAWN_PERSON) {
+                            _persons.add(new Person(spawnX, spawnY, _map));
                         }
                     case GameMap.TILE_STREET_VERT, GameMap.TILE_STREET_HORI:
                         if (FlxRandom.float() < CHANCE_TO_SPAWN_CAR) {
@@ -89,6 +94,7 @@ class PlayState extends FlxState
             }
         }
         add(_cars);
+        add(_persons);
         add(_buildings);
     }
 
@@ -103,6 +109,7 @@ class PlayState extends FlxState
         _duck = null;
         _buildings = null;
         _cars = null;
+        _persons = null;
         _buildingGibs = null;
         _endtimer = null;
         _explosion = null;
@@ -129,6 +136,7 @@ class PlayState extends FlxState
         if (_duck.y > _map._height * _map._tileSize - _duck.height)
             _duck.y = _map._height * _map._tileSize - _duck.height;
 
+        // End condition
         if (_cars.countLiving() == 0 && _buildings.countLiving() == 0 && _endtimer == null) {
             _endtimer = new FlxTimer();
             _endtimer.start(2.0, gotoEndState);
