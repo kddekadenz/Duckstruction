@@ -23,6 +23,7 @@ class PlayState extends FlxState
     private var _cars:FlxTypedGroup<Car>;
     private var _buildingGibs:FlxEmitter;
     private var _endtimer(default, null):FlxTimer;
+    private var _explosion:Explosion;
 
     private var BUILDING_PADDING = 2;
     private var MAX_BUILDINGS = 100;
@@ -51,6 +52,8 @@ class PlayState extends FlxState
 		_buildingGibs.bounce = 0.35;
 		_buildingGibs.makeParticles("assets/images/building_gibs.png", 200, 20, true, 0.0);
         add(_buildingGibs);
+
+        _explosion = new Explosion();
 
         FlxG.worldBounds.width = _map._width * _map._tileSize + 10;
         FlxG.worldBounds.height = _map._height * _map._tileSize + 10;
@@ -101,6 +104,7 @@ class PlayState extends FlxState
         _cars = null;
         _buildingGibs = null;
         _endtimer = null;
+        _explosion = null;
 		super.destroy();
 	}
 
@@ -135,6 +139,12 @@ class PlayState extends FlxState
         if (duck.alive && duck.exists && building.alive && building.exists) {
             _buildingGibs.at(building);
             _buildingGibs.start(true, 5);
+            var midpoint = building.getMidpoint();
+            _explosion.x = midpoint.x - _explosion.width / 2.0;
+            _explosion.y = midpoint.y;
+            remove(_explosion);
+            add(_explosion);
+            _explosion.animation.play("explode");
             building.kill();
         }
     }
