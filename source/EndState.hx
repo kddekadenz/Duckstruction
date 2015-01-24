@@ -18,7 +18,7 @@ class EndState extends FlxState
 	override public function create():Void
 	{
         FlxG.mouse.visible = true;
-
+        bgColor = 0xFFFFFFFF;
 
         _whatDoWeDoNow = new FlxText(0, 0, 0, "You destroyed everything!", 24);
         _whatDoWeDoNow.screenCenter();

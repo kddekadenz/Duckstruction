@@ -12,8 +12,10 @@ class StoryState extends FlxState
     override public function create():Void
     {
         FlxG.mouse.visible = true;
+        bgColor = 0xFFFFFFFF;
 
-        _btnContinue = new FlxButton(0, 0, "continue", clickContinue);
+        _btnContinue = new FlxButton(0, 0, "", clickContinue);
+        _btnContinue.loadGraphic("assets/images/continuemaske.png");
         _btnContinue.screenCenter();
         add(_btnContinue);
         _btnContinue.y += 100;

@@ -36,6 +36,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		FlxG.mouse.visible = false;
+        bgColor = 0xFF000000;
 
         _map = new GameMap();
         add(_map);
@@ -137,6 +138,7 @@ class PlayState extends FlxState
     private function duckOverlapBuilding(duck:Duck, building:Building):Void
     {
         if (duck.alive && duck.exists && building.alive && building.exists) {
+            FlxG.sound.play("assets/sounds/explosion1.wav", 0.5, false);
             _buildingGibs.at(building);
             _buildingGibs.start(true, 5);
             var midpoint = building.getMidpoint();
@@ -145,7 +147,6 @@ class PlayState extends FlxState
             remove(_explosion);
             add(_explosion);
             _explosion.animation.play("explode");
-            FlxG.sound.play("assets/sounds/Quak01.wav", 1, false);
             building.kill();
         }
     }
