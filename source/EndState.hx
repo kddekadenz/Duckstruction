@@ -10,6 +10,7 @@ using flixel.util.FlxSpriteUtil;
 
 class EndState extends FlxState
 {
+    private var _whatDoWeDoNow:FlxText;
     private var _logo:FlxSprite;
     private var _duck:FlxSprite;
     private var _btnPlay:FlxButton;
@@ -17,6 +18,16 @@ class EndState extends FlxState
 	override public function create():Void
 	{
         FlxG.mouse.visible = true;
+
+
+        _whatDoWeDoNow = new FlxText(0, 0, 0, "You destroyed everything!", 24);
+        _whatDoWeDoNow.screenCenter();
+        add(_whatDoWeDoNow);
+        _whatDoWeDoNow.y -= 250;
+        _whatDoWeDoNow = new FlxText(0, 0, 0, "What do we do now?", 24);
+        _whatDoWeDoNow.screenCenter();
+        add(_whatDoWeDoNow);
+        _whatDoWeDoNow.y -= 200;
 
         _logo = new FlxSprite(0, 0, "assets/images/maskelogo.png");
         _logo.screenCenter();
