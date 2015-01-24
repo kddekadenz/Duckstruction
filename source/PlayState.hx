@@ -22,7 +22,7 @@ class PlayState extends FlxState
     private var _buildingGibs:FlxEmitter;
 
     private var BUILDING_PADDING = 2;
-    private var MAX_BUILDINGS = 100;
+    private var MAX_BUILDINGS = 2;
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -89,7 +89,6 @@ class PlayState extends FlxState
 	{
 		super.update();
 
-
         FlxG.overlap(_duck, _buildings, duckOverlapBuilding);
 
         // Make duck stay on map
@@ -102,6 +101,9 @@ class PlayState extends FlxState
         if (_duck.y > _map._height * _map._tileSize - _duck.height)
             _duck.y = _map._height * _map._tileSize - _duck.height;
 
+        if (_buildings.countLiving() == 0) {
+            FlxG.switchState(new EndState());
+        }
 	}	
 
     private function duckOverlapBuilding(duck:Duck, building:Building):Void
