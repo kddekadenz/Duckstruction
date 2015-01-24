@@ -7,8 +7,8 @@ import flixel.util.FlxRandom;
 
 class GameMap extends FlxTilemap
 {
-    public var _width:Int = 20;
-    public var _height:Int = 20;
+    public var _width:Int = 100;
+    public var _height:Int = 100;
     public var _tileSize:Int = 128;
 
     public static inline var TILE_TRANSPARENT = 0;
