@@ -8,7 +8,8 @@ class Building extends FlxSprite
     public function new(x:Float, y:Float)
     {
         super(x, y);
-        makeGraphic(64, 256, 0xFF0000FF);
+        loadGraphic("assets/images/haus1_new.png", true, 105, 272);
+        animation.add("destroyed", [1], 1, true);
     }
 
     override public function update():Void
@@ -24,7 +25,6 @@ class Building extends FlxSprite
     override public function kill():Void
     {
         alive = false;
-        y = y + 256 -32;
-        makeGraphic(64, 32, 0xFF0000FF);
+        animation.play("destroyed");
     }
 }
