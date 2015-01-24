@@ -8,6 +8,7 @@ import flixel.FlxState;
 import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.util.FlxRandom;
 import flixel.util.FlxMath;
 
 /**
@@ -31,11 +32,7 @@ class PlayState extends FlxState
         add(_map);
 
         _buildings = new FlxTypedGroup<Building>();
-        _buildings.add(new Building(200, 200));
-        _buildings.add(new Building(400, 200));
-        _buildings.add(new Building(600, 200));
-        _buildings.add(new Building(800, 200));
-        add(_buildings);
+        placeBuildings();
 
         _buildingGibs = new FlxEmitter();
 		_buildingGibs.setXSpeed( -1600, 1600);
@@ -52,6 +49,22 @@ class PlayState extends FlxState
 
 		super.create();
 	}
+
+    private function placeBuildings():Void
+    {
+        for (tileX in 3..._map._width - 3) {
+            for (tileY in 3..._map._height - 3) {
+                switch (_map.getTile(tileX, tileY)) {
+                    case GameMap.TILE_BLOCK:
+                        if (FlxRandom.float() < 0.1) {
+                            _buildings.add(new Building(tileX * _map._tileSize, tileY * _map._tileSize));
+                        }
+                }
+            }
+        }
+        add(_buildings);
+    }
+
 	
 	/**
 	 * Function that is called when this state is destroyed - you might want to 
@@ -70,10 +83,24 @@ class PlayState extends FlxState
 		super.update();
 
         FlxG.overlap(_duck, _buildings, duckOverlapBuilding);
+
+        // Make duck stay on map
+        if (_duck.x < 0)
+            _duck.x = 0;
+        if (_duck.y < 0)
+            _duck.y = 0;
+        if (_duck.x > _map._width * _map._tileSize - _duck.width)
+            _duck.x = _map._width * _map._tileSize - _duck.width;
+        if (_duck.y > _map._height * _map._tileSize - _duck.height)
+            _duck.y = _map._height * _map._tileSize - _duck.height;
+
 	}	
 
     private function duckOverlapBuilding(duck:Duck, building:Building):Void
     {
+        trace("hit");
+        trace("alive" + building.alive);
+        trace("exists" + building.exists);
         if (duck.alive && duck.exists && building.alive && building.exists) {
             _buildingGibs.at(building);
             _buildingGibs.start(true, 5);
