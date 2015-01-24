@@ -47,7 +47,7 @@ class MenuState extends FlxState
 
     private function clickPlay():Void
     {
-        FlxG.switchState(new PlayState());
+        FlxG.switchState(new StoryState());
     }
 	
 	/**
