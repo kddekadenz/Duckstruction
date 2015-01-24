@@ -10,6 +10,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxRandom;
 import flixel.util.FlxMath;
+import flixel.util.FlxTimer;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -20,9 +21,10 @@ class PlayState extends FlxState
     private var _duck:Duck;
     private var _buildings:FlxTypedGroup<Building>;
     private var _buildingGibs:FlxEmitter;
+    private var _endtimer(default, null):FlxTimer;
 
     private var BUILDING_PADDING = 2;
-    private var MAX_BUILDINGS = 2;
+    private var MAX_BUILDINGS = 100;
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -46,11 +48,14 @@ class PlayState extends FlxState
 		_buildingGibs.makeParticles("assets/images/building_gibs.png", 200, 20, true, 0.0);
         add(_buildingGibs);
 
-        _duck = new Duck();
-        add(_duck);
-        FlxG.camera.follow(_duck, FlxCamera.STYLE_TOPDOWN, null, 1);
         FlxG.worldBounds.width = _map._width * _map._tileSize + 10;
         FlxG.worldBounds.height = _map._height * _map._tileSize + 10;
+
+        _duck = new Duck();
+        _duck.x = FlxG.worldBounds.width / 2.0;
+        _duck.y = FlxG.worldBounds.height / 2.0;
+        add(_duck);
+        FlxG.camera.follow(_duck, FlxCamera.STYLE_TOPDOWN, null, 1);
 
 		super.create();
 	}
@@ -101,8 +106,9 @@ class PlayState extends FlxState
         if (_duck.y > _map._height * _map._tileSize - _duck.height)
             _duck.y = _map._height * _map._tileSize - _duck.height;
 
-        if (_buildings.countLiving() == 0) {
-            FlxG.switchState(new EndState());
+        if (_buildings.countLiving() == 0 && _endtimer == null) {
+            _endtimer = new FlxTimer();
+            _endtimer.start(3.0, gotoEndState);
         }
 	}	
 
@@ -113,5 +119,10 @@ class PlayState extends FlxState
             _buildingGibs.start(true, 5);
             building.kill();
         }
+    }
+
+    private function gotoEndState(t:FlxTimer):Void
+    {
+        FlxG.switchState(new EndState());
     }
 }
