@@ -20,11 +20,14 @@ class PlayState extends FlxState
     private var _map:GameMap;
     private var _duck:Duck;
     private var _buildings:FlxTypedGroup<Building>;
+    private var _cars:FlxTypedGroup<Car>;
     private var _buildingGibs:FlxEmitter;
     private var _endtimer(default, null):FlxTimer;
 
     private var BUILDING_PADDING = 2;
     private var MAX_BUILDINGS = 100;
+    private var CHANCE_TO_SPAWN_BUILDING = 0.2;
+    private var CHANCE_TO_SPAWN_CAR = 0.1;
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -37,6 +40,7 @@ class PlayState extends FlxState
         add(_map);
 
         _buildings = new FlxTypedGroup<Building>();
+        _cars = new FlxTypedGroup<Car>();
         placeBuildings();
 
         _buildingGibs = new FlxEmitter();
@@ -65,16 +69,23 @@ class PlayState extends FlxState
         var buildingCount = 0;
         for (tileY in BUILDING_PADDING..._map._height - BUILDING_PADDING) {
             for (tileX in BUILDING_PADDING..._map._width - BUILDING_PADDING) {
+                var spawnX = tileX * _map._tileSize;
+                var spawnY = tileY * _map._tileSize;
                 switch (_map.getTile(tileX, tileY)) {
                     case GameMap.TILE_BLOCK:
-                        if (FlxRandom.float() < 0.2 && buildingCount < MAX_BUILDINGS) {
-                            _buildings.add(new Building(tileX * _map._tileSize, tileY * _map._tileSize));
+                        if (FlxRandom.float() < CHANCE_TO_SPAWN_BUILDING && buildingCount < MAX_BUILDINGS) {
+                            _buildings.add(new Building(spawnX, spawnY));
                             buildingCount++;
+                        }
+                    case GameMap.TILE_STREET_VERT, GameMap.TILE_STREET_HORI, GameMap.TILE_STREET_CROSS:
+                        if (FlxRandom.float() < CHANCE_TO_SPAWN_CAR) {
+                            _cars.add(new Car(spawnX, spawnY, _map));
                         }
                 }
             }
         }
         add(_buildings);
+        add(_cars);
     }
 
 	
@@ -84,6 +95,12 @@ class PlayState extends FlxState
 	 */
 	override public function destroy():Void
 	{
+        _map = null;
+        _duck = null;
+        _buildings = null;
+        _cars = null;
+        _buildingGibs = null;
+        _endtimer = null;
 		super.destroy();
 	}
 
@@ -95,6 +112,7 @@ class PlayState extends FlxState
 		super.update();
 
         FlxG.overlap(_duck, _buildings, duckOverlapBuilding);
+        FlxG.overlap(_duck, _cars, duckOverlapCar);
 
         // Make duck stay on map
         if (_duck.x < 0)
@@ -118,6 +136,13 @@ class PlayState extends FlxState
             _buildingGibs.at(building);
             _buildingGibs.start(true, 5);
             building.kill();
+        }
+    }
+
+    private function duckOverlapCar(duck:Duck, car:Car):Void
+    {
+        if (duck.alive && duck.exists && car.alive && car.exists) {
+            car.kill();
         }
     }
 
