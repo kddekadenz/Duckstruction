@@ -13,8 +13,11 @@ class Duck extends FlxSprite
     {
         super();
         //makeGraphic(32, 32, 0xFFFF0000);
-        loadGraphic("assets/images/duck.png", true, 64, 64);
+        loadGraphic("assets/images/duck2.png", true, 64, 64);
+        setFacingFlip(FlxObject.LEFT, false, false);
+        setFacingFlip(FlxObject.RIGHT, true, false);
         animation.add("walk", [0, 1], 8, false);
+        animation.add("walkback", [2, 3], 8, false);
         drag.x = drag.y = 1600;
         width = 32;
         offset.x = 16;
@@ -43,7 +46,7 @@ class Duck extends FlxSprite
 					animation.play("walk");
 					
 				case FlxObject.UP:
-					animation.play("walk");
+					animation.play("walkback");
 					
 				case FlxObject.DOWN:
 					animation.play("walk");
