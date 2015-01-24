@@ -7,13 +7,14 @@ import flixel.util.FlxAngle;
 
 class Duck extends FlxSprite
 {
-    public var speed:Float = 260;
+    public var speed:Float = 300;
 
     public function new()
     {
         super();
         //makeGraphic(32, 32, 0xFFFF0000);
         loadGraphic("assets/images/duck.png", true, 64, 64);
+        animation.add("walk", [0, 1], 8, false);
         drag.x = drag.y = 1600;
         width = 32;
         offset.x = 16;
@@ -31,7 +32,27 @@ class Duck extends FlxSprite
     }
 
     // Stolen from FlixelTut
-    // http://haxeflixel.com/documentation/part-iii-groundwork/
+    // https://raw.githubusercontent.com/HaxeFlixel/flixel-tutorial/Part-VII/source/Player.hx
+	override public function draw():Void 
+	{
+		if (velocity.x != 0 || velocity.y != 0)
+		{
+			switch(facing)
+			{
+				case FlxObject.LEFT, FlxObject.RIGHT:
+					animation.play("walk");
+					
+				case FlxObject.UP:
+					animation.play("walk");
+					
+				case FlxObject.DOWN:
+					animation.play("walk");
+			}
+		}
+			
+		super.draw();
+	}
+
     private function movement():Void
     {
         var _up:Bool = false;
@@ -84,4 +105,6 @@ class Duck extends FlxSprite
             FlxAngle.rotatePoint(speed, 0, 0, 0, mA, velocity);
         }
     }
+
+
 }
