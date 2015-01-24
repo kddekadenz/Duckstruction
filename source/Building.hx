@@ -12,8 +12,10 @@ class Building extends FlxSprite
         switch (FlxRandom.intRanged(1, 2)) {
             case 1:
                 loadGraphic("assets/images/haus1_new.png", true, 105, 272);
+                y -= 272;
             case 2:
                 loadGraphic("assets/images/haus2_new.png", true, 105, 244);
+                y -= 244;
         }
         animation.add("destroyed", [1], 1, true);
     }
