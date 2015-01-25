@@ -22,28 +22,31 @@ class Car extends FlxSprite
                 _speed = 350.0;
         }
         //makeGraphic(64, 64, 0xFFFF0000);
-        loadGraphic("assets/images/hamster_links2.png", true, 90, 90);
+        loadGraphic("assets/images/hamster_all.png", true, 90, 90);
         setFacingFlip(FlxObject.LEFT, true, false);
         animation.add("roll", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 20, true);
+        animation.add("rollfront", [16, 17, 18, 19, 20, 21, 22, 23], 12, true);
         animation.add("stop", [0], 1, true);
     }
 
-	override public function draw():Void 
-	{
-		if (velocity.x != 0 || velocity.y != 0)
-		{
-			switch(facing)
-			{
-				case FlxObject.LEFT, FlxObject.RIGHT:
-					animation.play("roll");
-					
-				case FlxObject.UP:
-				case FlxObject.DOWN:
-			}
-		}
-			
-		super.draw();
-	}
+//	override public function draw():Void 
+//	{
+//		if (velocity.x != 0 || velocity.y != 0)
+//		{
+//			switch(facing)
+//			{
+//				case FlxObject.LEFT, FlxObject.RIGHT:
+//					animation.play("roll");
+//					
+//				case FlxObject.UP:
+//
+//				case FlxObject.DOWN:
+//                    animation.play("rollfront");
+//			}
+//		}
+//			
+//		super.draw();
+//	}
 
     override public function update():Void
     {
@@ -66,8 +69,10 @@ class Car extends FlxSprite
                 animation.play("roll");
             } else if (velocity.y < 0) {
                 facing = FlxObject.UP;
+                animation.play("rollfront");
             } else if (velocity.y > 0) {
                 facing = FlxObject.DOWN;
+                animation.play("rollfront");
             }
 
             if (x < 0) {
