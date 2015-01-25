@@ -80,7 +80,7 @@ class PlayState extends FlxState
         add(_duck);
         FlxG.camera.follow(_duck, FlxCamera.STYLE_TOPDOWN, null, 1);
 
-        FlxG.sound.playMusic("assets/music/ente_evil.ogg");
+        FlxG.sound.playMusic("assets/music/ente_evil.mp3");
 
 		super.create();
 	}
