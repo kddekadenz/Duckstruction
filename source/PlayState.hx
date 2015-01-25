@@ -184,6 +184,7 @@ class PlayState extends FlxState
     private function duckOverlapCar(duck:Duck, car:Car):Void
     {
         if (duck.alive && duck.exists && car.alive && car.exists) {
+            duck.kick();
             _hamsterGibs.at(car);
             _hamsterGibs.start(true, 5);
             car.kill();
