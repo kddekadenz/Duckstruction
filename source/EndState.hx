@@ -21,10 +21,12 @@ class EndState extends FlxState
         bgColor = 0xFFFFFFFF;
 
         _whatDoWeDoNow = new FlxText(0, 0, 0, "You destroyed everything!", 24);
+        _whatDoWeDoNow.setBorderStyle(FlxText.BORDER_OUTLINE, 0xFF000000, 2.0);
         _whatDoWeDoNow.screenCenter();
         add(_whatDoWeDoNow);
         _whatDoWeDoNow.y -= 250;
         _whatDoWeDoNow = new FlxText(0, 0, 0, "What do we do now?", 24);
+        _whatDoWeDoNow.setBorderStyle(FlxText.BORDER_OUTLINE, 0xFF000000, 2.0);
         _whatDoWeDoNow.screenCenter();
         add(_whatDoWeDoNow);
         _whatDoWeDoNow.y -= 200;
