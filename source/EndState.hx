@@ -25,11 +25,11 @@ class EndState extends FlxState
         _whatDoWeDoNow.screenCenter();
         add(_whatDoWeDoNow);
         _whatDoWeDoNow.y -= 250;
-        _whatDoWeDoNow = new FlxText(0, 0, 0, "What do we do now?", 24);
+        _whatDoWeDoNow = new FlxText(1, 0, 0, "What do we do now?", 48);
         _whatDoWeDoNow.setBorderStyle(FlxText.BORDER_OUTLINE, 0xFF000000, 2.0);
         _whatDoWeDoNow.screenCenter();
         add(_whatDoWeDoNow);
-        _whatDoWeDoNow.y -= 200;
+        _whatDoWeDoNow.y -= 190;
 
         _logo = new FlxSprite(0, 0, "assets/images/maskelogo.png");
         _logo.screenCenter();
