@@ -9,6 +9,8 @@ class Duck extends FlxSprite
 {
     public var speed:Float = 300;
 
+    private var _kicking = false;
+
     public function new()
     {
         super();
@@ -29,6 +31,7 @@ class Duck extends FlxSprite
     public function kick():Void
     {
         velocity.x = velocity.y = 0;
+        _kicking = true;
         animation.play("kick", true);
     }
 
@@ -47,7 +50,13 @@ class Duck extends FlxSprite
     // https://raw.githubusercontent.com/HaxeFlixel/flixel-tutorial/Part-VII/source/Player.hx
 	override public function draw():Void 
 	{
-		if (velocity.x != 0 || velocity.y != 0)
+        if (_kicking) {
+            if (animation.finished) {
+                _kicking = false;
+            }
+        }
+
+		if ((velocity.x != 0 || velocity.y != 0) && !_kicking)
 		{
 			switch(facing)
 			{
