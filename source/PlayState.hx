@@ -24,6 +24,7 @@ class PlayState extends FlxState
     private var _cars:FlxTypedGroup<Car>;
     private var _persons:FlxTypedGroup<Person>;
     private var _buildingGibs:FlxEmitter;
+    private var _hamsterGibs:FlxEmitter;
     private var _endtimer(default, null):FlxTimer;
     private var _explosion:Explosion;
 
@@ -58,6 +59,15 @@ class PlayState extends FlxState
 		_buildingGibs.bounce = 0.35;
 		_buildingGibs.makeParticles("assets/images/particlestuff1.png", 80, 20, true, 0.0);
         add(_buildingGibs);
+
+        _hamsterGibs = new FlxEmitter();
+		_hamsterGibs.setXSpeed( -1200, 1200);
+		_hamsterGibs.setYSpeed( -1200, 0);
+		_hamsterGibs.setRotation( -720, -720);
+		_hamsterGibs.gravity = 800;
+		_hamsterGibs.bounce = 0.35;
+        _hamsterGibs.makeParticles("assets/images/hamster_rauskatapultiert.png", 1, 16, false, 0.0);
+        add(_hamsterGibs);
 
         _explosion = new Explosion();
 
@@ -170,6 +180,8 @@ class PlayState extends FlxState
     private function duckOverlapCar(duck:Duck, car:Car):Void
     {
         if (duck.alive && duck.exists && car.alive && car.exists) {
+            _hamsterGibs.at(car);
+            _hamsterGibs.start(true, 5);
             car.kill();
         }
     }

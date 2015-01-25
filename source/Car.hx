@@ -26,7 +26,8 @@ class Car extends FlxSprite
         setFacingFlip(FlxObject.LEFT, true, false);
         animation.add("roll", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], 20, true);
         animation.add("rollfront", [16, 17, 18, 19, 20, 21, 22, 23], 12, true);
-        animation.add("stop", [0], 1, true);
+        animation.add("rollback", [25, 26, 27, 28, 29, 30, 31, 32], 12, true);
+        animation.add("stop", [24], 1, true);
     }
 
 //	override public function draw():Void 
@@ -69,7 +70,7 @@ class Car extends FlxSprite
                 animation.play("roll");
             } else if (velocity.y < 0) {
                 facing = FlxObject.UP;
-                animation.play("rollfront");
+                animation.play("rollback");
             } else if (velocity.y > 0) {
                 facing = FlxObject.DOWN;
                 animation.play("rollfront");
