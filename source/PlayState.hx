@@ -90,7 +90,7 @@ class PlayState extends FlxState
                         }
                     case GameMap.TILE_STREET_VERT, GameMap.TILE_STREET_HORI:
                         if (FlxRandom.float() < CHANCE_TO_SPAWN_CAR) {
-                            _cars.add(new Car(spawnX + 10, spawnY + 10, _map));
+                            _cars.add(new Car(spawnX + 19, spawnY + 10, _map));
                         }
                 }
             }
@@ -141,7 +141,9 @@ class PlayState extends FlxState
             _duck.y = _map._height * _map._tileSize - _duck.height;
 
         // End condition
-        if (_cars.countLiving() == 0 && _buildings.countLiving() == 0 && _endtimer == null) {
+        //trace("buildings: " + _buildings.length);
+        //trace("ruins: " + _ruins.length);
+        if (_cars.countLiving() == 0 && _buildings.length == _ruins.length && _endtimer == null) {
             _endtimer = new FlxTimer();
             _endtimer.start(2.0, gotoEndState);
         }
