@@ -10,6 +10,7 @@ class StoryState extends FlxState
 {
     private var _storyBoard:FlxSprite;
     private var _btnContinue:FlxButton;
+    private var _btnSkip:FlxButton;
     private var _contCount:Int = 0;
 
     override public function create():Void
@@ -29,6 +30,10 @@ class StoryState extends FlxState
         _btnContinue.y += 250;
 
         FlxG.sound.play("assets/sounds/EnteRTAINER/Narrator01.wav");
+
+        _btnSkip = new FlxButton(1024 - 128, 576 - 32, "", clickSkip);
+        _btnSkip.loadGraphic("assets/images/skipbutton_small.png");
+        add(_btnSkip);
 
         super.create();
     }
@@ -57,7 +62,11 @@ class StoryState extends FlxState
             case 4:
                 FlxG.switchState(new PlayState());
         }
+    }
 
+    private function clickSkip():Void
+    {
+        FlxG.switchState(new PlayState());
     }
 
     override public function update():Void
