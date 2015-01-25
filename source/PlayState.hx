@@ -174,6 +174,7 @@ class PlayState extends FlxState
             add(_explosion);
             _explosion.animation.play("explode");
             building.kill();
+            FlxG.camera.shake(FlxRandom.floatRanged(0.007, 0.01), 0.5);
             _ruins.add(building);
             _buildings.remove(building);
         }
