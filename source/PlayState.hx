@@ -164,6 +164,7 @@ class PlayState extends FlxState
     private function duckOverlapBuilding(duck:Duck, building:Building):Void
     {
         if (duck.alive && duck.exists && building.alive && building.exists) {
+            duck.kick();
             FlxG.sound.play("assets/sounds/explosion1.wav", 0.5, false);
             _buildingGibs.at(building);
             _buildingGibs.start(true, 5);

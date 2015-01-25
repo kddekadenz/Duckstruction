@@ -13,16 +13,23 @@ class Duck extends FlxSprite
     {
         super();
         //makeGraphic(32, 32, 0xFFFF0000);
-        loadGraphic("assets/images/duck3.png", true, 64, 68);
+        loadGraphic("assets/images/duck_all.png", true, 64, 68);
         setFacingFlip(FlxObject.LEFT, false, false);
         setFacingFlip(FlxObject.RIGHT, true, false);
         animation.add("walk", [0, 1], 8, false);
         animation.add("walkback", [2, 3], 8, false);
+        animation.add("kick", [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19], 60, false);
         drag.x = drag.y = 1600;
         width = 32;
         height = 52;
         offset.x = 16;
         offset.y = 8;
+    }
+
+    public function kick():Void
+    {
+        velocity.x = velocity.y = 0;
+        animation.play("kick", true);
     }
 
     override public function update():Void
