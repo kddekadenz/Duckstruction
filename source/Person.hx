@@ -13,7 +13,7 @@ class Person extends FlxSprite
     public function new(X:Float, Y:Float, map:GameMap)
     {
         super(X, Y);
-        loadGraphic("assets/images/keks01.png", true, 54, 54);
+        loadGraphic("assets/images/keks0" + Std.string(FlxRandom.intRanged(1,2)) + ".png", true, 54, 54);
         animation.add("walk", [0, 1], 8, true);
         animation.play("walk");
         _map = map;
