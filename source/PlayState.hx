@@ -155,7 +155,9 @@ class PlayState extends FlxState
         // End condition
         //trace("buildings: " + _buildings.length);
         //trace("ruins: " + _ruins.length);
-        if (_cars.countLiving() == 0 && _buildings.length == _ruins.length && _endtimer == null) {
+        if (_cars.countLiving() == 0 
+            && _buildings.length - _ruins.length <= 2 // so you dont need to destroy everything / search last buildings
+            && _endtimer == null) {
             _endtimer = new FlxTimer();
             _endtimer.start(2.0, gotoEndState);
         }

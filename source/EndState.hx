@@ -23,7 +23,7 @@ class EndState extends FlxState
 
         //FlxG.sound.destroy();
 
-        _whatDoWeDoNow = new FlxText(0, 0, 0, "You destroyed everything!", 24);
+        _whatDoWeDoNow = new FlxText(0, 0, 0, "You destroyed the city!", 24);
         _whatDoWeDoNow.setBorderStyle(FlxText.BORDER_OUTLINE, 0xFF000000, 2.0);
         _whatDoWeDoNow.screenCenter();
         add(_whatDoWeDoNow);
