@@ -51,6 +51,7 @@ class StoryState extends FlxState
             case 3:
                 _storyBoard.loadGraphic("assets/images/RAGE.png");
                 FlxG.sound.play("assets/sounds/RageAD02.wav");
+                FlxG.camera.shake(0.04, 2.3);
                 _storyBoard.screenCenter();
                 _contCount++;
             case 4:
