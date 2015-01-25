@@ -18,6 +18,8 @@ class StoryState extends FlxState
         FlxG.mouse.visible = true;
         bgColor = 0xFFFFFFFF;
 
+        FlxG.sound.destroy(true);
+
         _storyBoard = new FlxSprite();
         _storyBoard.loadGraphic("assets/images/S1.png");
         _storyBoard.screenCenter();
