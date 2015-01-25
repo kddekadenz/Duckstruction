@@ -20,6 +20,7 @@ class PlayState extends FlxState
     private var _map:GameMap;
     private var _duck:Duck;
     private var _buildings:FlxTypedGroup<Building>;
+    private var _ruins:FlxTypedGroup<Building>;
     private var _cars:FlxTypedGroup<Car>;
     private var _persons:FlxTypedGroup<Person>;
     private var _buildingGibs:FlxEmitter;
@@ -46,6 +47,7 @@ class PlayState extends FlxState
         _buildings = new FlxTypedGroup<Building>();
         _cars = new FlxTypedGroup<Car>();
         _persons = new FlxTypedGroup<Person>();
+        _ruins = new FlxTypedGroup<Building>();
         placeBuildings();
 
         _buildingGibs = new FlxEmitter();
@@ -94,6 +96,7 @@ class PlayState extends FlxState
             }
         }
         add(_cars);
+        add(_ruins);
         add(_persons);
         add(_buildings);
     }
@@ -108,6 +111,7 @@ class PlayState extends FlxState
         _map = null;
         _duck = null;
         _buildings = null;
+        _ruins = null;
         _cars = null;
         _persons = null;
         _buildingGibs = null;
@@ -156,6 +160,8 @@ class PlayState extends FlxState
             add(_explosion);
             _explosion.animation.play("explode");
             building.kill();
+            _ruins.add(building);
+            _buildings.remove(building);
         }
     }
 
