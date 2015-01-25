@@ -18,8 +18,9 @@ Idea
 Team
 ====
 
- * Rebekka Helzle
- * Till Behrend
- * Rick Hoppmann
- * Silvio Müller
- * Oliver Zscheyge
+ * Rebekka "pixie" Helzle
+ * Till "fox" Behrend
+ * Andreas "monoton" Drechsler
+ * Rick "tinyworlds" Hoppmann
+ * Silvio "evolutier" Müller
+ * Oliver "oz" Zscheyge
