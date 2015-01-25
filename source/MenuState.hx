@@ -16,6 +16,7 @@ class MenuState extends FlxState
     private var _logo:FlxSprite;
     private var _duck:FlxSprite;
     private var _btnPlay:FlxButton;
+    private var _btnCredits:FlxButton;
 
 	/**
 	 * Function that is called up when to state is created to set it up. 
@@ -43,12 +44,21 @@ class MenuState extends FlxState
         add(_btnPlay);
         _btnPlay.y += 100;
 
+        _btnCredits = new FlxButton(1024 - 224, 576 - 32, "", clickCredits);
+        _btnCredits.loadGraphic("assets/images/creditsbutton_small.png");
+        add(_btnCredits);
+
 		super.create();
 	}
 
     private function clickPlay():Void
     {
         FlxG.switchState(new StoryState());
+    }
+
+    private function clickCredits():Void
+    {
+        FlxG.switchState(new AboutState());
     }
 	
 	/**

@@ -14,6 +14,7 @@ class EndState extends FlxState
     private var _logo:FlxSprite;
     private var _duck:FlxSprite;
     private var _btnPlay:FlxButton;
+    private var _btnCredits:FlxButton;
 
 	override public function create():Void
 	{
@@ -49,6 +50,10 @@ class EndState extends FlxState
         add(_btnPlay);
         _btnPlay.y += 150;
 
+        _btnCredits = new FlxButton(1024 - 224, 576 - 32, "", clickCredits);
+        _btnCredits.loadGraphic("assets/images/creditsbutton_small.png");
+        add(_btnCredits);
+
 		super.create();
 	}
 
@@ -57,18 +62,16 @@ class EndState extends FlxState
         FlxG.switchState(new PlayState());
     }
 	
-	/**
-	 * Function that is called when this state is destroyed - you might want to 
-	 * consider setting all objects this state uses to null to help garbage collection.
-	 */
+    private function clickCredits():Void
+    {
+        FlxG.switchState(new AboutState());
+    }
+
 	override public function destroy():Void
 	{
 		super.destroy();
 	}
 
-	/**
-	 * Function that is called once every frame.
-	 */
 	override public function update():Void
 	{
 		super.update();
