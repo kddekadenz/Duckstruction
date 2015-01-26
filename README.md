@@ -11,15 +11,15 @@ How to build it
  1. [Download and install Haxe from here](http://www.openfl.org/documentation/getting-started/installing-openfl/)
  2. Install HaxeFlixel and its dependencies using Lime:
 
-    lime install flixel
+        lime install flixel
 
  3. Go to the project directory and run:
 
-    lime test flash
+        lime test flash
 
-    lime test linux
+        lime test linux
 
-    lime test windows
+        lime test windows
 
 <!---
 Idea
