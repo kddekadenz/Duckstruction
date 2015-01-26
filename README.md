@@ -1,10 +1,27 @@
 DUCKSTRUCTION
 =============
 
-GGJ2015
+Global Game Jam 2015
 
 Theme: "What do we do now?"
 
+How to build it
+---------------
+
+ 1. [Download and install Haxe from here](http://www.openfl.org/documentation/getting-started/installing-openfl/)
+ 2. Install HaxeFlixel and its dependencies using Lime:
+
+    lime install flixel
+
+ 3. Go to the project directory and run:
+
+    lime test flash
+
+    lime test linux
+
+    lime test windows
+
+<!---
 Idea
 ----
 
@@ -14,9 +31,10 @@ Idea
  * When city is fully destroyed:
    "What do we do now?"
  * Game starts over
+-->
 
 Team
-====
+----
 
  * Rebekka "pixie" Helzle
  * Till "fox" Behrend
