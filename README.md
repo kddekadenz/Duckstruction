@@ -1,7 +1,7 @@
 DUCKSTRUCTION
 =============
 
-Fork to release the gameart as open source on http://www.opengameart.org  
+Fork to release the gameart as open source on http://opengameart.org/content/cute-cartoony-game
   
   
 Global Game Jam 2015
