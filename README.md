@@ -1,6 +1,9 @@
 DUCKSTRUCTION
 =============
 
+Fork to release the gameart as open source on http://www.opengameart.org  
+  
+  
 Global Game Jam 2015
 
 Theme: "What do we do now?"
