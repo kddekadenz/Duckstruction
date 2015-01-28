@@ -1,0 +1,5 @@
+Description:
+<p>[name] created for <a href="http://www.tinyworlds.org/duckstruction.html">Duckstruction</a><br /> Includes [description].</p><div id="stcpDiv"><em>You are a cute duckling destroying the city, because a rolling hamster killed your family.</em></div>
+
+Tags:
+cute, cartoon, comic, cartoony, adorable
